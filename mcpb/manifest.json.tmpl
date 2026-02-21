@@ -1,0 +1,99 @@
+{
+  "manifest_version": "0.3",
+  "name": "borsdata-mcp",
+  "display_name": "Börsdata MCP",
+  "description": "MCP server for the Börsdata API — access Swedish stock market data, financial reports, KPIs, and instrument metadata.",
+  "version": "%%VERSION%%",
+  "author": "emmanuelay",
+  "repository": "https://github.com/emmanuelay/borsdata-mcp",
+  "homepage": "https://github.com/emmanuelay/borsdata-mcp",
+  "license": "MIT",
+  "server": {
+    "type": "binary",
+    "mcp_config": {
+      "command": "server/borsdata-mcp",
+      "env": {
+        "BORSDATA_API_KEY": "{{user_config.api_key}}"
+      }
+    }
+  },
+  "platform_overrides": {
+    "win32": {
+      "server": {
+        "mcp_config": {
+          "command": "server/borsdata-mcp.exe"
+        }
+      }
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"]
+  },
+  "user_config": [
+    {
+      "id": "api_key",
+      "name": "Börsdata API Key",
+      "description": "Your Börsdata API key. Get one at https://borsdata.se",
+      "required": true,
+      "sensitive": true
+    }
+  ],
+  "tools": [
+    {
+      "name": "list_instruments",
+      "description": "List all instruments (companies) available in Börsdata. Returns instrument ID, name, ticker, sector, market, branch, and country."
+    },
+    {
+      "name": "search_instruments",
+      "description": "Search instruments by name or ticker. Performs a case-insensitive substring match."
+    },
+    {
+      "name": "get_instruments_updated",
+      "description": "Get update timestamps for all instruments. Shows when each instrument was last updated."
+    },
+    {
+      "name": "get_stock_splits",
+      "description": "Get all stock splits. Returns instrument ID, split date, split type, and ratio."
+    },
+    {
+      "name": "get_stock_prices",
+      "description": "Get historical stock prices for a specific instrument. Returns date, open, high, low, close, and volume."
+    },
+    {
+      "name": "get_latest_stock_prices",
+      "description": "Get the latest stock prices for all instruments."
+    },
+    {
+      "name": "get_stock_prices_by_date",
+      "description": "Get stock prices for all instruments on a specific date."
+    },
+    {
+      "name": "get_reports",
+      "description": "Get financial reports for an instrument. Supports yearly, R12 (rolling 12 months), and quarterly reports."
+    },
+    {
+      "name": "get_kpis_updated",
+      "description": "Get update timestamps for KPI calculations. Shows when KPIs were last recalculated for each instrument."
+    },
+    {
+      "name": "get_kpi_history",
+      "description": "Get KPI history for an instrument. Returns quarterly mean values over time."
+    },
+    {
+      "name": "get_kpi_screener",
+      "description": "Get a single KPI value for a specific instrument, period, and calculation type."
+    },
+    {
+      "name": "get_kpi_list_screener",
+      "description": "Get a specific KPI value for all instruments. Useful for screening/filtering instruments by a KPI."
+    },
+    {
+      "name": "get_kpi_summary",
+      "description": "Get KPI summary for an instrument. Returns yearly KPI aggregations."
+    },
+    {
+      "name": "get_metadata",
+      "description": "Get reference/metadata. Use this to look up names for IDs returned by other tools."
+    }
+  ]
+}

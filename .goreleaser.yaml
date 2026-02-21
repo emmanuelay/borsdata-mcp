@@ -1,0 +1,54 @@
+version: 2
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: borsdata-mcp
+    main: .
+    binary: borsdata-mcp
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
+      - -X main.version={{.Version}}
+      - -X main.commit={{.ShortCommit}}
+      - -X main.date={{.Date}}
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - LICENSE
+      - README.md
+    format_overrides:
+      - goos: windows
+        formats: ['zip']
+
+checksum:
+  name_template: 'checksums.txt'
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+      - '^chore:'
+
+brews:
+  - repository:
+      owner: emmanuelay
+      name: homebrew-tap
+    directory: Formula
+    homepage: "https://github.com/emmanuelay/borsdata-mcp"
+    description: "MCP server for Börsdata API"
+    license: "MIT"
+    download_strategy: CurlDownloadStrategy

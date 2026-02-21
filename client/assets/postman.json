@@ -1,0 +1,643 @@
+{
+	"info": {
+		"_postman_id": "3787f48b-3bf0-405f-8bd5-feae1692beef",
+		"name": "BD-API SERVICE V1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Instrument (Company List)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InstrumentsUpdated",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/Instruments/updated?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"Instruments",
+						"updated"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StockSplit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/Instruments/StockSplits?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"Instruments",
+						"StockSplits"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kpis Updated",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/kpis/updated?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"kpis",
+						"updated"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StockPrices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/97/stockprices?authKey={{KEY}}&maxcount=20",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"97",
+						"stockprices"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						},
+						{
+							"key": "maxcount",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "StockPrices To From",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/97/stockprices?authKey={{KEY}}&from=2018-01-01&to=2018-02-01",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"97",
+						"stockprices"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						},
+						{
+							"key": "from",
+							"value": "2018-01-01"
+						},
+						{
+							"key": "to",
+							"value": "2018-02-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All lastest Stockprices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/stockprices/last?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"stockprices",
+						"last"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Stockprices by Date",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/stockprices/date?authKey={{KEY}}&date=2019-02-01",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"stockprices",
+						"date"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						},
+						{
+							"key": "date",
+							"value": "2019-02-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report YEAR",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/97/reports/year?authKey={{KEY}}&maxCount=20",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"97",
+						"reports",
+						"year"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						},
+						{
+							"key": "maxCount",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report R12",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/97/reports/r12?authKey={{KEY}}&maxCount=40",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"97",
+						"reports",
+						"r12"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						},
+						{
+							"key": "maxCount",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report Quarter",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/97/reports/quarter?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"97",
+						"reports",
+						"quarter"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Reports",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/97/reports?authKey={{KEY}}&maxYearCount=2&maxR12QCount=1",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"97",
+						"reports"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						},
+						{
+							"key": "maxYearCount",
+							"value": "2"
+						},
+						{
+							"key": "maxR12QCount",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kpi History",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/Instruments/97/kpis/6/quarter/mean/history?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"Instruments",
+						"97",
+						"kpis",
+						"6",
+						"quarter",
+						"mean",
+						"history"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kpis Single Screener",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/97/kpis/2/15year/mean?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"97",
+						"kpis",
+						"2",
+						"15year",
+						"mean"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kpis List Screener",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/kpis/2/15year/mean?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"kpis",
+						"2",
+						"15year",
+						"mean"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kpi Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/Instruments/97/kpis/year/summary?authKey={{KEY}}&maxCount=40",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"Instruments",
+						"97",
+						"kpis",
+						"year",
+						"summary"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						},
+						{
+							"key": "maxCount",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Countries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/countries?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"countries"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Markets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/markets?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"markets"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sectors",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/sectors?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"sectors"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Branshes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/branches?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"branches"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Kpis Metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/kpis/metadata?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"kpis",
+						"metadata"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report Metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/instruments/reports/metadata?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"instruments",
+						"reports",
+						"metadata"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Translation Metadata",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}/v1/translationmetadata?authKey={{KEY}}",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"v1",
+						"translationmetadata"
+					],
+					"query": [
+						{
+							"key": "authKey",
+							"value": "{{KEY}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

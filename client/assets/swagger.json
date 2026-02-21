@@ -1,0 +1,4287 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Borsdata API v1.0",
+    "description": "Get access to Nordic Stockmarket - Instruments, Reports and KPIs. </br>   \r\n                For Nordic Market you need Pro membership.\r\n                </br>\r\n                API BaseUrl is : https://apiservice.borsdata.se  </br> \r\n                On  GitHub you find test-client, Wiki and Tickets </br>  \r\n                https://github.com/Borsdata-Sweden </br> ",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://apiservice.borsdata.se/"
+    }
+  ],
+  "paths": {
+    "/v1/branches": {
+      "get": {
+        "tags": [
+          "Instrument Meta"
+        ],
+        "summary": "Returns all Branches",
+        "description": "Returns all Branches",
+        "operationId": "branchesv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BranchesRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/countries": {
+      "get": {
+        "tags": [
+          "Instrument Meta"
+        ],
+        "summary": "Returns all Countries for Nordic.",
+        "description": "Returns all Countries",
+        "operationId": "countriesv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CountriesRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/holdings/insider": {
+      "get": {
+        "tags": [
+          "Holdings Nordic"
+        ],
+        "summary": "Returns Holdings insider for array of instruments.",
+        "description": "Returns Holdings insider. Only Nordic instruments.",
+        "operationId": "holdingsinsiderv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6 (Max 50)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "3,97,6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HoldingsInsiderTableArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/holdings/shorts": {
+      "get": {
+        "tags": [
+          "Holdings Nordic"
+        ],
+        "summary": "Returns Holdings shorts for array of instruments. ",
+        "description": "Returns Holdings shorts. Only Nordic instruments.",
+        "operationId": "shortsv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HoldingsShortsTableRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/holdings/buyback": {
+      "get": {
+        "tags": [
+          "Holdings Nordic"
+        ],
+        "summary": "Returns Holdings buyback for array of instruments",
+        "description": "Returns Holdings buyback. Only Nordic instruments.",
+        "operationId": "buybackv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6 (Max 50)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "3,97,6"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HoldingsBuybackArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/instruments": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Returns all Nordic Instruments",
+        "description": "Returns all Nordic Instruments",
+        "operationId": "instrumentsv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentsRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/global": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Returns all Global Instruments. (Require Pro+)",
+        "description": "Only Pro+. Returns all Global Instruments.",
+        "operationId": "instrumentsglobalv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentsRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/updated": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Returns last Updated Nordic Instruments",
+        "description": "Time when Nordic Instrument or Reports was updated.",
+        "operationId": "instrumentsupdatedv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InstrumentUpdatedRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/description": {
+      "get": {
+        "tags": [
+          "Instruments"
+        ],
+        "summary": "Returns Swedish, English description for array of instruments",
+        "description": "Description of the instrument",
+        "operationId": "Instrument Description",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6,10214 (Max 50)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "3,97,6,10214"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesDescriptionArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/report/calendar": {
+      "get": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Returns report calendar for array of instruments",
+        "description": "Next reportdata",
+        "operationId": "reportscalendarv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6,10214 (Max 50)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "3,97,6,10214"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesCalenderArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/dividend/calendar": {
+      "get": {
+        "tags": [
+          "Calendar"
+        ],
+        "summary": "Returns dividend date for array of instruments",
+        "description": "Returns dividend date for array of instruments",
+        "operationId": "DividendCalendar",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6,10214 (Max 50)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "3,97,6,10214"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompaniesDividendArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/{insid}/kpis/{kpiId}/{reporttype}/{pricetype}/history": {
+      "get": {
+        "tags": [
+          "Kpi History"
+        ],
+        "summary": "Returns Kpis History. Nordic.",
+        "description": "Returns Kpis History. <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-History  ",
+        "operationId": "histkpisv1",
+        "parameters": [
+          {
+            "name": "insid",
+            "in": "path",
+            "description": "Instrument Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "kpiId",
+            "in": "path",
+            "description": "KpiId",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 2
+            }
+          },
+          {
+            "name": "reporttype",
+            "in": "path",
+            "description": "ReportType ",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "year"
+            }
+          },
+          {
+            "name": "pricetype",
+            "in": "path",
+            "description": "PriceType",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "mean"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "description": "Max Count. 10 default. year=20 max, r12&quarter=40 max",
+            "schema": {
+              "type": "string",
+              "default": "20"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisHistoryRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/{insid}/kpis/{reporttype}/summary": {
+      "get": {
+        "tags": [
+          "Kpi History"
+        ],
+        "summary": "Returns Kpis summary list. ",
+        "description": "Returns Kpis summary list. <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-History ",
+        "operationId": "summarykpisv1",
+        "parameters": [
+          {
+            "name": "insid",
+            "in": "path",
+            "description": "Instrument Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "reporttype",
+            "in": "path",
+            "description": "Report Type (Year, R12, Quarter)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "year"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "description": "Max Kpi Count",
+            "schema": {
+              "type": "string",
+              "default": "10"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisSummaryRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/kpis/{kpiId}/{reporttype}/{pricetype}/history": {
+      "get": {
+        "tags": [
+          "Kpi History"
+        ],
+        "summary": "Instrument Array. Returns Kpis History for list of instruments.",
+        "description": "Instrument Array. Returns Kpis History for list of instruments (max 50). <br />  Error code: NOT_EXIST, NOT_ACTIVE, NO_GLOBAL_ACCESS <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-History ",
+        "operationId": "histarraykpisv1",
+        "parameters": [
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "97,3,6"
+            }
+          },
+          {
+            "name": "kpiId",
+            "in": "path",
+            "description": "Kpi Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 2
+            }
+          },
+          {
+            "name": "reporttype",
+            "in": "path",
+            "description": "Report Type ",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "year"
+            }
+          },
+          {
+            "name": "pricetype",
+            "in": "path",
+            "description": "Price Type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "mean"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "description": "Max Count. 10 default. year=20 max, r12&quarter=40 max",
+            "schema": {
+              "type": "string",
+              "default": "20"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisHistoryArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/{insid}/kpis/{kpiId}/{calcGroup}/{calc}": {
+      "get": {
+        "tags": [
+          "Kpi Screener"
+        ],
+        "summary": "Returns Kpis Data for one Instrument. ",
+        "description": "Returns Kpis Data for one Instrument. <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-Screener",
+        "operationId": "kpisv1",
+        "parameters": [
+          {
+            "name": "insid",
+            "in": "path",
+            "description": "Instrument Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "kpiId",
+            "in": "path",
+            "description": "Kpi Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 2
+            }
+          },
+          {
+            "name": "calcGroup",
+            "in": "path",
+            "description": "Kpi Calculation Group. Mainly based on time.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "last"
+            }
+          },
+          {
+            "name": "calc",
+            "in": "path",
+            "description": "Kpi Calculation",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "lastest"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/kpis/{kpiId}/{calcGroup}/{calc}": {
+      "get": {
+        "tags": [
+          "Kpi Screener"
+        ],
+        "summary": "Returns Kpis Data for All Instruments.",
+        "description": "Returns Kpis Data for All Instruments.  <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-Screener",
+        "operationId": "kpislistv1",
+        "parameters": [
+          {
+            "name": "kpiId",
+            "in": "path",
+            "description": "Kpi Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 2
+            }
+          },
+          {
+            "name": "calcGroup",
+            "in": "path",
+            "description": "Kpi Calculation Group. Mainly based on time.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "1year"
+            }
+          },
+          {
+            "name": "calc",
+            "in": "path",
+            "description": "Kpi Calculation",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "mean"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisAllCompRespV1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisAllCompRespV1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisAllCompRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/global/kpis/{kpiId}/{calcGroup}/{calc}": {
+      "get": {
+        "tags": [
+          "Kpi Screener"
+        ],
+        "summary": "Returns Kpis Data for All Global Instruments",
+        "description": "Returns Kpis Data for All Global Instruments <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-Screener",
+        "operationId": "kpislistglobalv1",
+        "parameters": [
+          {
+            "name": "kpiId",
+            "in": "path",
+            "description": "Kpi Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 2
+            }
+          },
+          {
+            "name": "calcGroup",
+            "in": "path",
+            "description": "Kpi Calculation Group. Mainly based on time.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "1year"
+            }
+          },
+          {
+            "name": "calc",
+            "in": "path",
+            "description": "Kpi Calculation",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "mean"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisAllCompRespV1"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisAllCompRespV1"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisAllCompRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/instruments/kpis/updated": {
+      "get": {
+        "tags": [
+          "Kpi Screener"
+        ],
+        "summary": "Returns Nordic Kpis Calculation DateTime",
+        "description": "Returns Nordic Kpis Calculation DateTime <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-Screener",
+        "operationId": "kpisupdatedv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpisCalcUpdatedRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/instruments/kpis/metadata": {
+      "get": {
+        "tags": [
+          "Kpi Screener"
+        ],
+        "summary": "Returns Kpis metadata",
+        "description": "Returns all Kpis metadata like name and format <br/> https://github.com/Borsdata-Sweden/API/wiki/KPI-Screener",
+        "operationId": "kpimetadatav1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpiMetadataRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/markets": {
+      "get": {
+        "tags": [
+          "Instrument Meta"
+        ],
+        "summary": "Returns all Markets",
+        "description": "Returns all Markets",
+        "operationId": "marketsv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarketsRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/instruments/{id}/reports/{reporttype}": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Returns Reports for Instrument. Report Type (year, r12, quarter).  ",
+        "description": "Returns Reports for Instrument.  <br/> https://github.com/Borsdata-Sweden/API/wiki/Reports ",
+        "operationId": "reportsv1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Instrument Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "reporttype",
+            "in": "path",
+            "description": "Report Type (year, r12, quarter)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "r12"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "description": "Max Report Count. Max Year=20, R12&Quarter=40.",
+            "schema": {
+              "type": "string",
+              "default": "20"
+            }
+          },
+          {
+            "name": "original",
+            "in": "query",
+            "description": "Return original currency. &original=0 or 1",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportsRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/{id}/reports": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Returns Reports for one Instrument. All Reports Type included (year, r12, quarter). ",
+        "description": "Returns Reports for one Instrument.  <br/> https://github.com/Borsdata-Sweden/API/wiki/Reports ",
+        "operationId": "reportscompoundv1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Instrument Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 3
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "maxYearCount",
+            "in": "query",
+            "description": "Max Year Report Count. Default 10. Max 20.",
+            "schema": {
+              "type": "string",
+              "default": "20"
+            }
+          },
+          {
+            "name": "maxR12QCount",
+            "in": "query",
+            "description": "Max R12 and Quarter Report Count. Default 10. Max 40.",
+            "schema": {
+              "type": "string",
+              "default": "40"
+            }
+          },
+          {
+            "name": "original",
+            "in": "query",
+            "description": "Return original currency. &original=0 or 1.",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportsCompoundRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/reports/metadata": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Returns Report metadata",
+        "description": "Returns Report metadata. Name and format <br/> https://github.com/Borsdata-Sweden/API/wiki/Reports ",
+        "operationId": "reportmetadatav1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportMetadataRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/reports": {
+      "get": {
+        "tags": [
+          "Reports"
+        ],
+        "summary": "Instrument Array. Returns Reports for list of instruments.  ",
+        "description": "Instrument Array. Returns Year, R12, Quarter reports for list of instruments (max 50).  <br />  Error code: NOT_EXIST, NOT_ACTIVE, NO_GLOBAL_ACCESS <br/> https://github.com/Borsdata-Sweden/API/wiki/Reports ",
+        "operationId": "reportsarrayv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "97,3,6"
+            }
+          },
+          {
+            "name": "maxYearCount",
+            "in": "query",
+            "description": "Max Year Report Count. Default 10. Max 20.",
+            "schema": {
+              "type": "string",
+              "default": "20"
+            }
+          },
+          {
+            "name": "maxR12QCount",
+            "in": "query",
+            "description": "Max R12 and Quarter Report Count. Default 10. Max 40.",
+            "schema": {
+              "type": "string",
+              "default": "40"
+            }
+          },
+          {
+            "name": "original",
+            "in": "query",
+            "description": "Return original currency. &original=0 or 1",
+            "schema": {
+              "type": "string",
+              "default": "0"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportsArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/sectors": {
+      "get": {
+        "tags": [
+          "Instrument Meta"
+        ],
+        "summary": "Returns all Sectors",
+        "description": "Returns all Sectors",
+        "operationId": "sectorsv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SectorsRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/instruments/{insid}/stockprices": {
+      "get": {
+        "tags": [
+          "StockPrices"
+        ],
+        "summary": "Returns StockPrice for Instrument. 10 year default.  ",
+        "description": "Returns StockPrice for Instrument. <br />  Error code: NOT_EXIST, NOT_ACTIVE, NO_GLOBAL_ACCESS <br/> https://github.com/Borsdata-Sweden/API/wiki/Stockprice ",
+        "operationId": "stockpricesv1",
+        "parameters": [
+          {
+            "name": "insid",
+            "in": "path",
+            "description": "Instrument Id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Date From. yyyy-MM-dd (2002-02-01)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Date To. yyyy-MM-dd (2022-02-01)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "description": "Max Year Count. Max 20.)",
+            "schema": {
+              "type": "string",
+              "default": "20"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockPricesRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/stockprices/last": {
+      "get": {
+        "tags": [
+          "StockPrices. Get Lastvalues"
+        ],
+        "summary": "Returns Last StockPrices for all Instruments. Only Nordic(Pro).",
+        "description": "Returns Last StockPrice for all Instrument. Only Nordic(Pro). <br/> https://github.com/Borsdata-Sweden/API/wiki/Stockprice",
+        "operationId": "stockpriceslastv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockPricesLastRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/stockprices/global/last": {
+      "get": {
+        "tags": [
+          "StockPrices. Get Lastvalues"
+        ],
+        "summary": "Returns Last/Latest StockPrices for all Global Instruments.  Only Global(Pro+).",
+        "description": "Returns Last/Latest StockPrice for all Global Instrument. Only Global(Pro+). <br/> https://github.com/Borsdata-Sweden/API/wiki/Stockprice",
+        "operationId": "stockpricesgloballastv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockPricesGlobalLastRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/stockprices/date": {
+      "get": {
+        "tags": [
+          "StockPrices. Get list by date"
+        ],
+        "summary": "Returns one StockPrice for each Instrument for a specific date.  Only Nordic(Pro).",
+        "description": "Returns one StockPrice for each Instrument for a specific date.  Only Nordic(Pro). <br/> https://github.com/Borsdata-Sweden/API/wiki/Stockprice",
+        "operationId": "stockpricesdatev1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date. yyyy-MM-dd",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockPricesDateRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/stockprices/global/date": {
+      "get": {
+        "tags": [
+          "StockPrices. Get list by date"
+        ],
+        "summary": "Returns one StockPrice for each global Instrument for a specific date. Only Global(Pro+).",
+        "description": "Returns one StockPrice for each global Instrument for a specific date. Only Global(Pro+). <br/> https://github.com/Borsdata-Sweden/API/wiki/Stockprice",
+        "operationId": "stockpricesglobaldatev1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Date. yyyy-MM-dd",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockPricesGlobalDateRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/stockprices": {
+      "get": {
+        "tags": [
+          "StockPrices"
+        ],
+        "summary": "Instrument Array. Returns StockPrice for list of Instruments. (Max 50 instruments).",
+        "description": "Instrument Array. Returns StockPrices for Instruments. <br />  Error code: NOT_EXIST, NOT_ACTIVE, NO_GLOBAL_ACCESS <br/> https://github.com/Borsdata-Sweden/API/wiki/Stockprice",
+        "operationId": "stockpricesarrayv1",
+        "parameters": [
+          {
+            "name": "instList",
+            "in": "query",
+            "description": "Comma separated list. Like &instList=97,3,6,10214 (Max 50)",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "3,97,6,10214"
+            }
+          },
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Date From. yyyy-MM-dd (2010-02-01)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Date To. yyyy-MM-dd  (2022-02-01)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockPricesArrayRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "418": {
+            "description": "No Global access"
+          }
+        }
+      }
+    },
+    "/v1/instruments/StockSplits": {
+      "get": {
+        "tags": [
+          "StockSplits"
+        ],
+        "summary": "Returns Stock Splits for Nordic Instruments. Max 1 Year",
+        "description": "Returns Stock Splits for Nordic Instruments. Max 1 Year",
+        "operationId": "StockSplitsv1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Date From. yyyy-MM-dd (2010-02-01)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockSplitRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/translationmetadata": {
+      "get": {
+        "tags": [
+          "Instrument Meta"
+        ],
+        "summary": "Returns translations for bransch, sector, country",
+        "description": "Returns translations",
+        "operationId": "TranslationMetadatav1",
+        "parameters": [
+          {
+            "name": "authKey",
+            "in": "query",
+            "description": "API Authentication Key",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "APIKEY"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranslationMetadataRespV1"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BranchV1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "BranchId",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "Branch Name",
+            "nullable": true
+          },
+          "sectorId": {
+            "type": "integer",
+            "description": "Branch Sector Id",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BranchesRespV1": {
+        "type": "object",
+        "properties": {
+          "branches": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BranchV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BuybackRespV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BuybackRowV1"
+            },
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BuybackRowV1": {
+        "type": "object",
+        "properties": {
+          "change": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "changeProc": {
+            "type": "number",
+            "format": "double"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "shares": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "sharesProc": {
+            "type": "number",
+            "format": "double"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompaniesCalenderArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompaniesCalenderV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompaniesCalenderV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportCalenderDateResp"
+            },
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompaniesDescriptionArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompanyDescriptionV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompaniesDividendArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CompaniesDividendsV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompaniesDividendsV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DividendsDateV1"
+            },
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CompanyDescriptionV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "languageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CountriesRespV1": {
+        "type": "object",
+        "properties": {
+          "countries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CountryV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CountryV1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DividendsDateV1": {
+        "type": "object",
+        "properties": {
+          "amountPaid": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "currencyShortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "distributionFrequency": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "excludingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dividendType": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "HoldingsBuybackArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BuybackRespV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HoldingsInsiderTableArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsiderRespV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "HoldingsShortsTableRespV1": {
+        "type": "object",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ShortsRespV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsiderRespV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InsiderRowV1"
+            },
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsiderRowV1": {
+        "type": "object",
+        "properties": {
+          "misc": {
+            "type": "boolean"
+          },
+          "ownerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ownerPosition": {
+            "type": "string",
+            "nullable": true
+          },
+          "equityProgram": {
+            "type": "boolean"
+          },
+          "shares": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "price": {
+            "type": "number",
+            "format": "double"
+          },
+          "amount": {
+            "type": "number",
+            "format": "double"
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "transactionType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "verificationDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "transactionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstrumentUpdatedRespV1": {
+        "type": "object",
+        "properties": {
+          "instruments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstrumentUpdatedV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstrumentUpdatedV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstrumentV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlName": {
+            "type": "string",
+            "nullable": true
+          },
+          "instrument": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isin": {
+            "type": "string",
+            "nullable": true
+          },
+          "ticker": {
+            "type": "string",
+            "nullable": true
+          },
+          "yahoo": {
+            "type": "string",
+            "nullable": true
+          },
+          "sectorId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "marketId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "branchId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "listingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "stockPriceCurrency": {
+            "type": "string",
+            "nullable": true
+          },
+          "reportCurrency": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "InstrumentsRespV1": {
+        "type": "object",
+        "properties": {
+          "instruments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstrumentV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpiHistoryV1": {
+        "type": "object",
+        "properties": {
+          "y": {
+            "type": "integer",
+            "description": "Year",
+            "format": "int32"
+          },
+          "p": {
+            "type": "integer",
+            "description": "Period",
+            "format": "int32"
+          },
+          "v": {
+            "type": "number",
+            "description": "Value",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpiMetadataRespV1": {
+        "type": "object",
+        "properties": {
+          "kpiHistoryMetadatas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KpiMetadataV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpiMetadataV1": {
+        "type": "object",
+        "properties": {
+          "kpiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nameSv": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "format": {
+            "type": "string",
+            "nullable": true
+          },
+          "isString": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpiSummaryGroupV1": {
+        "type": "object",
+        "properties": {
+          "KpiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KpiSummaryValueV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpiSummaryValueV1": {
+        "type": "object",
+        "properties": {
+          "y": {
+            "type": "integer",
+            "description": "Year",
+            "format": "int32"
+          },
+          "p": {
+            "type": "integer",
+            "description": "Period",
+            "format": "int32"
+          },
+          "v": {
+            "type": "number",
+            "description": "Value",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpiV1": {
+        "type": "object",
+        "properties": {
+          "i": {
+            "type": "integer",
+            "description": "Instrument Id",
+            "format": "int64"
+          },
+          "n": {
+            "type": "number",
+            "description": "Numeric Value",
+            "format": "double",
+            "nullable": true
+          },
+          "s": {
+            "type": "string",
+            "description": "String Value",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpisAllCompRespV1": {
+        "type": "object",
+        "properties": {
+          "kpiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "group": {
+            "type": "string",
+            "nullable": true
+          },
+          "calculation": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KpiV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpisCalcUpdatedRespV1": {
+        "type": "object",
+        "properties": {
+          "kpisCalcUpdated": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpisHistoryArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "kpiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reportTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "priceValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "kpisList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KpisHistoryCompV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpisHistoryCompV1": {
+        "type": "object",
+        "properties": {
+          "instrument": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KpiHistoryV1"
+            },
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpisHistoryRespV1": {
+        "type": "object",
+        "properties": {
+          "kpiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reportTime": {
+            "type": "string",
+            "nullable": true
+          },
+          "priceValue": {
+            "type": "string",
+            "nullable": true
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KpiHistoryV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpisRespV1": {
+        "type": "object",
+        "properties": {
+          "kpiId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "group": {
+            "type": "string",
+            "nullable": true
+          },
+          "calculation": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "$ref": "#/components/schemas/KpiV1"
+          }
+        },
+        "additionalProperties": false
+      },
+      "KpisSummaryRespV1": {
+        "type": "object",
+        "properties": {
+          "instrument": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "reportType": {
+            "type": "string",
+            "nullable": true
+          },
+          "kpis": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KpiSummaryGroupV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketV1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "countryId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "isIndex": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "exchangeName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MarketsRespV1": {
+        "type": "object",
+        "properties": {
+          "markets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarketV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "ReportCalenderDateResp": {
+        "type": "object",
+        "properties": {
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reportType": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportMetadataRespV1": {
+        "type": "object",
+        "properties": {
+          "reportMetadatas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportMetadataV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportMetadataV1": {
+        "type": "object",
+        "properties": {
+          "reportPropery": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameSv": {
+            "type": "string",
+            "nullable": true
+          },
+          "nameEn": {
+            "type": "string",
+            "nullable": true
+          },
+          "format": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportV1": {
+        "type": "object",
+        "properties": {
+          "year": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "period": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "revenues": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "gross_Income": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "operating_Income": {
+            "type": "number",
+            "format": "double"
+          },
+          "profit_Before_Tax": {
+            "type": "number",
+            "format": "double"
+          },
+          "profit_To_Equity_Holders": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "earnings_Per_Share": {
+            "type": "number",
+            "format": "double"
+          },
+          "number_Of_Shares": {
+            "type": "number",
+            "format": "double"
+          },
+          "dividend": {
+            "type": "number",
+            "format": "double"
+          },
+          "intangible_Assets": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tangible_Assets": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "financial_Assets": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "non_Current_Assets": {
+            "type": "number",
+            "format": "double"
+          },
+          "cash_And_Equivalents": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "current_Assets": {
+            "type": "number",
+            "format": "double"
+          },
+          "total_Assets": {
+            "type": "number",
+            "format": "double"
+          },
+          "total_Equity": {
+            "type": "number",
+            "format": "double"
+          },
+          "non_Current_Liabilities": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "current_Liabilities": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "total_Liabilities_And_Equity": {
+            "type": "number",
+            "format": "double"
+          },
+          "net_Debt": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cash_Flow_From_Operating_Activities": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cash_Flow_From_Investing_Activities": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cash_Flow_From_Financing_Activities": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "cash_Flow_For_The_Year": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "free_Cash_Flow": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "stock_Price_Average": {
+            "type": "number",
+            "format": "double"
+          },
+          "stock_Price_High": {
+            "type": "number",
+            "format": "double"
+          },
+          "stock_Price_Low": {
+            "type": "number",
+            "format": "double"
+          },
+          "report_Start_Date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "report_End_Date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "broken_Fiscal_Year": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "currency": {
+            "type": "string",
+            "nullable": true
+          },
+          "currency_Ratio": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "net_Sales": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "report_Date": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportsArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "reportList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportsCombineRespV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportsCombineRespV1": {
+        "type": "object",
+        "properties": {
+          "instrument": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "reportsYear": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportV1"
+            },
+            "nullable": true
+          },
+          "reportsQuarter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportV1"
+            },
+            "nullable": true
+          },
+          "reportsR12": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportsCompoundRespV1": {
+        "type": "object",
+        "properties": {
+          "instrument": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "reportsYear": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportV1"
+            },
+            "nullable": true
+          },
+          "reportsQuarter": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportV1"
+            },
+            "nullable": true
+          },
+          "reportsR12": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReportsRespV1": {
+        "type": "object",
+        "properties": {
+          "instrument": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "reports": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReportV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorV1": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SectorsRespV1": {
+        "type": "object",
+        "properties": {
+          "sectors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SectorV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ShortsRespV1": {
+        "type": "object",
+        "properties": {
+          "insId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "shortsProc": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "shortsHolders": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "shortsAvgProc": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "shortsMilj": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "shortsAvgMilj": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "lastTransactionDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "dtcSum": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "dtcAvg": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "trend1w": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "trend1m": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "trend3m": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "trend6m": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPriceDateV1": {
+        "type": "object",
+        "properties": {
+          "i": {
+            "type": "integer",
+            "description": "Date",
+            "format": "int64"
+          },
+          "d": {
+            "type": "string",
+            "description": "Date",
+            "nullable": true
+          },
+          "h": {
+            "type": "number",
+            "description": "Highest Price",
+            "format": "double",
+            "nullable": true
+          },
+          "l": {
+            "type": "number",
+            "description": "Lowest Price",
+            "format": "double",
+            "nullable": true
+          },
+          "c": {
+            "type": "number",
+            "description": "Closing Price",
+            "format": "double"
+          },
+          "o": {
+            "type": "number",
+            "description": "Opening Price",
+            "format": "double",
+            "nullable": true
+          },
+          "v": {
+            "type": "integer",
+            "description": "Total Volume",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPriceFullV1": {
+        "type": "object",
+        "properties": {
+          "i": {
+            "type": "integer",
+            "description": "Date",
+            "format": "int64"
+          },
+          "d": {
+            "type": "string",
+            "description": "Date",
+            "nullable": true
+          },
+          "h": {
+            "type": "number",
+            "description": "Highest Price",
+            "format": "double",
+            "nullable": true
+          },
+          "l": {
+            "type": "number",
+            "description": "Lowest Price",
+            "format": "double",
+            "nullable": true
+          },
+          "c": {
+            "type": "number",
+            "description": "Closing Price",
+            "format": "double"
+          },
+          "o": {
+            "type": "number",
+            "description": "Opening Price",
+            "format": "double",
+            "nullable": true
+          },
+          "v": {
+            "type": "integer",
+            "description": "Total Volume",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPriceV1": {
+        "type": "object",
+        "properties": {
+          "d": {
+            "type": "string",
+            "description": "Date",
+            "nullable": true
+          },
+          "h": {
+            "type": "number",
+            "description": "Highest Price",
+            "format": "double",
+            "nullable": true
+          },
+          "l": {
+            "type": "number",
+            "description": "Lowest Price",
+            "format": "double",
+            "nullable": true
+          },
+          "c": {
+            "type": "number",
+            "description": "Closing Price",
+            "format": "double"
+          },
+          "o": {
+            "type": "number",
+            "description": "Opening Price",
+            "format": "double",
+            "nullable": true
+          },
+          "v": {
+            "type": "integer",
+            "description": "Total Volume",
+            "format": "int64",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPricesArrayRespListV1": {
+        "type": "object",
+        "properties": {
+          "instrument": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "error": {
+            "type": "string",
+            "nullable": true
+          },
+          "stockPricesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockPriceV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPricesArrayRespV1": {
+        "type": "object",
+        "properties": {
+          "stockPricesArrayList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockPricesArrayRespListV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPricesDateRespV1": {
+        "type": "object",
+        "properties": {
+          "stockPricesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockPriceDateV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPricesGlobalDateRespV1": {
+        "type": "object",
+        "properties": {
+          "stockPricesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockPriceDateV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPricesGlobalLastRespV1": {
+        "type": "object",
+        "properties": {
+          "stockPricesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockPriceFullV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPricesLastRespV1": {
+        "type": "object",
+        "properties": {
+          "stockPricesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockPriceFullV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockPricesRespV1": {
+        "type": "object",
+        "properties": {
+          "instrument": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "stockPricesList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockPriceV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockSplitRespV1": {
+        "type": "object",
+        "properties": {
+          "stockSplitList": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockSplitV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StockSplitV1": {
+        "type": "object",
+        "properties": {
+          "instrumentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "splitType": {
+            "type": "string",
+            "nullable": true
+          },
+          "ratio": {
+            "type": "string",
+            "nullable": true
+          },
+          "splitDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TranslationMetadataRespV1": {
+        "type": "object",
+        "properties": {
+          "translationMetadatas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TranslationMetadataV1"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TranslationMetadataV1": {
+        "type": "object",
+        "properties": {
+          "nameSv": {
+            "type": "string",
+            "description": "Swedish name",
+            "nullable": true
+          },
+          "nameEn": {
+            "type": "string",
+            "description": "English name",
+            "nullable": true
+          },
+          "translationKey": {
+            "type": "string",
+            "description": "Uniqe Key. Mostly a combination of a string and ID.\r\nYou need to create uniqe key in code. Like 'L_SECTOR_' + ID",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}
