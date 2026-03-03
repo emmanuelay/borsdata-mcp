@@ -1,5 +1,6 @@
 package models
 
+// ReportV1 represents a financial report with income statement, balance sheet, and share data for a given period.
 type ReportV1 struct {
 	Year                int     `json:"year"`
 	Period              int     `json:"period"`
@@ -28,10 +29,12 @@ type ReportV1 struct {
 	Currency            string  `json:"currency"`
 }
 
+// ReportsResponse is the top-level response for single-type report queries (yearly, R12, or quarterly).
 type ReportsResponse struct {
 	Reports []ReportV1 `json:"reports"`
 }
 
+// ReportsCompoundResponse is the top-level response when requesting all report types at once (yearly, R12, and quarterly).
 type ReportsCompoundResponse struct {
 	ReportsYear    []ReportV1 `json:"reportsYear"`
 	ReportsR12     []ReportV1 `json:"reportsR12"`
