@@ -2,7 +2,6 @@ package server
 
 import (
 	"github.com/emmanuelay/borsdata-mcp/client"
-	"github.com/google/jsonschema-go/jsonschema"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -22,8 +21,6 @@ func New(apiClient *client.Client, version string) *mcp.Server {
 	return s
 }
 
-var emptySchema = &jsonschema.Schema{Type: "object"}
-
 func registerTools(s *mcp.Server, h *handlers) {
 	mcp.AddTool(s, &mcp.Tool{
 		Name:        "list_instruments",
@@ -35,16 +32,14 @@ func registerTools(s *mcp.Server, h *handlers) {
 		Description: "Search instruments by name or ticker. Performs a case-insensitive substring match. Use scope 'global' for non-Nordic instruments (requires Pro+).",
 	}, h.searchInstruments)
 
-	s.AddTool(&mcp.Tool{
+	mcp.AddTool(s, &mcp.Tool{
 		Name:        "get_instruments_updated",
 		Description: "Get update timestamps for all instruments. Shows when each instrument was last updated.",
-		InputSchema: emptySchema,
 	}, h.getInstrumentsUpdated)
 
-	s.AddTool(&mcp.Tool{
+	mcp.AddTool(s, &mcp.Tool{
 		Name:        "get_stock_splits",
 		Description: "Get all stock splits. Returns instrument ID, split date, split type, and ratio.",
-		InputSchema: emptySchema,
 	}, h.getStockSplits)
 
 	mcp.AddTool(s, &mcp.Tool{
@@ -67,10 +62,9 @@ func registerTools(s *mcp.Server, h *handlers) {
 		Description: "Get financial reports for an instrument. Supports yearly, R12 (rolling 12 months), and quarterly reports.",
 	}, h.getReports)
 
-	s.AddTool(&mcp.Tool{
+	mcp.AddTool(s, &mcp.Tool{
 		Name:        "get_kpis_updated",
 		Description: "Get update timestamps for KPI calculations. Shows when KPIs were last recalculated for each instrument.",
-		InputSchema: emptySchema,
 	}, h.getKpisUpdated)
 
 	mcp.AddTool(s, &mcp.Tool{
@@ -103,10 +97,9 @@ func registerTools(s *mcp.Server, h *handlers) {
 		Description: "Get insider transactions for specified instruments. Returns owner name, position, shares, price, amount, currency, transaction type, and dates.",
 	}, h.getInsiderHoldings)
 
-	s.AddTool(&mcp.Tool{
+	mcp.AddTool(s, &mcp.Tool{
 		Name:        "get_short_holdings",
 		Description: "Get short positions for all instruments. Returns position holder, ISIN, shorting percent, notified capital, and report date. Only Nordic instruments.",
-		InputSchema: emptySchema,
 	}, h.getShortHoldings)
 
 	mcp.AddTool(s, &mcp.Tool{

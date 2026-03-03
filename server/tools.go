@@ -34,6 +34,8 @@ func errorResult(msg string) *mcp.CallToolResult {
 	return r
 }
 
+type emptyInput struct{}
+
 type scopeInput struct {
 	Scope string `json:"scope,omitempty" jsonschema:"Market scope: nordic or global (default: nordic)"`
 }
@@ -56,20 +58,20 @@ func (h *handlers) listInstruments(ctx context.Context, request *mcp.CallToolReq
 	return textResult(resp.Instruments), nil, nil
 }
 
-func (h *handlers) getInstrumentsUpdated(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (h *handlers) getInstrumentsUpdated(ctx context.Context, request *mcp.CallToolRequest, _ emptyInput) (*mcp.CallToolResult, any, error) {
 	resp, err := h.client.GetInstrumentsUpdated()
 	if err != nil {
-		return errorResult(fmt.Sprintf("Failed to get instruments updated: %v", err)), nil
+		return errorResult(fmt.Sprintf("Failed to get instruments updated: %v", err)), nil, nil
 	}
-	return textResult(resp.Instruments), nil
+	return textResult(resp.Instruments), nil, nil
 }
 
-func (h *handlers) getStockSplits(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (h *handlers) getStockSplits(ctx context.Context, request *mcp.CallToolRequest, _ emptyInput) (*mcp.CallToolResult, any, error) {
 	resp, err := h.client.GetStockSplits()
 	if err != nil {
-		return errorResult(fmt.Sprintf("Failed to get stock splits: %v", err)), nil
+		return errorResult(fmt.Sprintf("Failed to get stock splits: %v", err)), nil, nil
 	}
-	return textResult(resp.StockSplits), nil
+	return textResult(resp.StockSplits), nil, nil
 }
 
 type searchInput struct {
@@ -227,12 +229,12 @@ func (h *handlers) getReports(ctx context.Context, request *mcp.CallToolRequest,
 	}
 }
 
-func (h *handlers) getKpisUpdated(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (h *handlers) getKpisUpdated(ctx context.Context, request *mcp.CallToolRequest, _ emptyInput) (*mcp.CallToolResult, any, error) {
 	resp, err := h.client.GetKpisUpdated()
 	if err != nil {
-		return errorResult(fmt.Sprintf("Failed to get KPIs updated: %v", err)), nil
+		return errorResult(fmt.Sprintf("Failed to get KPIs updated: %v", err)), nil, nil
 	}
-	return textResult(resp.Instruments), nil
+	return textResult(resp.Instruments), nil, nil
 }
 
 type kpiHistoryInput struct {
@@ -365,10 +367,10 @@ func (h *handlers) getInsiderHoldings(ctx context.Context, request *mcp.CallTool
 	return textResult(resp.List), nil, nil
 }
 
-func (h *handlers) getShortHoldings(ctx context.Context, request *mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+func (h *handlers) getShortHoldings(ctx context.Context, request *mcp.CallToolRequest, _ emptyInput) (*mcp.CallToolResult, any, error) {
 	resp, err := h.client.GetShortHoldings()
 	if err != nil {
-		return errorResult(fmt.Sprintf("Failed to get short holdings: %v", err)), nil
+		return errorResult(fmt.Sprintf("Failed to get short holdings: %v", err)), nil, nil
 	}
 	// Filter out entries where Values is nil/empty
 	var filtered []models.ShortsRespV1
@@ -377,7 +379,7 @@ func (h *handlers) getShortHoldings(ctx context.Context, request *mcp.CallToolRe
 			filtered = append(filtered, item)
 		}
 	}
-	return textResult(filtered), nil
+	return textResult(filtered), nil, nil
 }
 
 type instrumentListWithMaxCountInput struct {
