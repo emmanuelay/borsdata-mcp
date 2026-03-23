@@ -27,22 +27,21 @@ type InsiderHoldingsResponse struct {
 	List []InsiderRespV1 `json:"list"`
 }
 
-// ShortsRowV1 represents a single short position report with holder name, ISIN, shorting percentage, and report date.
-type ShortsRowV1 struct {
-	ReportID           int     `json:"reportId"`
-	PositionHolderName string  `json:"positionHolderName"`
-	ISIN               string  `json:"isin"`
-	ShortingPercent    float64 `json:"shortingPercent"`
-	NotifiedCapital    float64 `json:"notifiedCapital"`
-	Currency           string  `json:"currency"`
-	ReportDate         string  `json:"reportDate"`
-}
-
-// ShortsRespV1 represents short positions for a single instrument.
+// ShortsRespV1 represents short position summary for a single instrument.
 type ShortsRespV1 struct {
-	InsID  int64         `json:"insId"`
-	Values []ShortsRowV1 `json:"values"`
-	Error  string        `json:"error"`
+	InsID                int64    `json:"insId"`
+	ShortsProc           *float64 `json:"shortsProc"`
+	ShortsHolders        *float64 `json:"shortsHolders"`
+	ShortsAvgProc        *float64 `json:"shortsAvgProc"`
+	ShortsMilj           *float64 `json:"shortsMilj"`
+	ShortsAvgMilj        *float64 `json:"shortsAvgMilj"`
+	LastTransactionDate  *string  `json:"lastTransactionDate"`
+	DtcSum               *float64 `json:"dtcSum"`
+	DtcAvg               *float64 `json:"dtcAvg"`
+	Trend1w              float64  `json:"trend1w"`
+	Trend1m              float64  `json:"trend1m"`
+	Trend3m              float64  `json:"trend3m"`
+	Trend6m              float64  `json:"trend6m"`
 }
 
 // ShortHoldingsResponse is the top-level response from the short holdings endpoint.

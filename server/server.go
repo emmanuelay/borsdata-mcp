@@ -94,12 +94,12 @@ func registerTools(s *mcp.Server, h *handlers) {
 
 	mcp.AddTool(s, &mcp.Tool{
 		Name:        "get_insider_holdings",
-		Description: "Get insider transactions for specified instruments. Returns owner name, position, shares, price, amount, currency, transaction type, and dates.",
+		Description: "Get insider transactions for specified instruments. Returns owner name, position, shares, price, amount, currency, transaction type, and dates. Supports pagination (offset/limit) and filtering by transaction_type (buy/sell), min_amount, and date range (from/to). Response includes total count per instrument.",
 	}, h.getInsiderHoldings)
 
 	mcp.AddTool(s, &mcp.Tool{
 		Name:        "get_short_holdings",
-		Description: "Get short positions for all instruments. Returns position holder, ISIN, shorting percent, notified capital, and report date. Only Nordic instruments.",
+		Description: "Get short position summaries for all instruments. Returns shorting percent, number of holders, average percent, shorted value (MSEK), last transaction date, days-to-cover, and trend data (1w/1m/3m/6m). Only Nordic instruments. Supports pagination (offset/limit) and filtering by min_shorting_percent. Response includes total count.",
 	}, h.getShortHoldings)
 
 	mcp.AddTool(s, &mcp.Tool{

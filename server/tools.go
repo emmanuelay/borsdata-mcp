@@ -4,12 +4,32 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"math"
 	"strings"
 
 	"github.com/emmanuelay/borsdata-mcp/client"
 	"github.com/emmanuelay/borsdata-mcp/models"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
+
+type paginatedInstrumentResult struct {
+	InsID  int64 `json:"insId"`
+	Total  int   `json:"total"`
+	Offset int   `json:"offset"`
+	Limit  int   `json:"limit"`
+	Values any   `json:"values"`
+}
+
+func paginate[T any](items []T, offset, limit int) []T {
+	if offset >= len(items) {
+		return nil
+	}
+	end := offset + limit
+	if end > len(items) {
+		end = len(items)
+	}
+	return items[offset:end]
+}
 
 type handlers struct {
 	client *client.Client
@@ -352,11 +372,17 @@ func (h *handlers) getKpiSummary(ctx context.Context, request *mcp.CallToolReque
 	return textResult(resp.Kpis), nil, nil
 }
 
-type instrumentListInput struct {
-	InstrumentIDs string `json:"instrument_ids" jsonschema:"Comma-separated instrument IDs (max 50)"`
+type insiderHoldingsInput struct {
+	InstrumentIDs   string  `json:"instrument_ids" jsonschema:"Comma-separated instrument IDs (max 50)"`
+	Offset          int     `json:"offset,omitempty" jsonschema:"Skip first N transactions per instrument (default: 0)"`
+	Limit           int     `json:"limit,omitempty" jsonschema:"Max transactions to return per instrument (default: 50)"`
+	TransactionType string  `json:"transaction_type,omitempty" jsonschema:"Filter by transaction type: buy or sell"`
+	MinAmount       float64 `json:"min_amount,omitempty" jsonschema:"Filter: only transactions with amount >= this value"`
+	From            string  `json:"from,omitempty" jsonschema:"Filter: only transactions on or after this date (YYYY-MM-DD)"`
+	To              string  `json:"to,omitempty" jsonschema:"Filter: only transactions on or before this date (YYYY-MM-DD)"`
 }
 
-func (h *handlers) getInsiderHoldings(ctx context.Context, request *mcp.CallToolRequest, input instrumentListInput) (*mcp.CallToolResult, any, error) {
+func (h *handlers) getInsiderHoldings(ctx context.Context, request *mcp.CallToolRequest, input insiderHoldingsInput) (*mcp.CallToolResult, any, error) {
 	if input.InstrumentIDs == "" {
 		return errorResult("instrument_ids is required"), nil, nil
 	}
@@ -364,22 +390,90 @@ func (h *handlers) getInsiderHoldings(ctx context.Context, request *mcp.CallTool
 	if err != nil {
 		return errorResult(fmt.Sprintf("Failed to get insider holdings: %v", err)), nil, nil
 	}
-	return textResult(resp.List), nil, nil
+
+	limit := input.Limit
+	if limit <= 0 {
+		limit = 50
+	}
+
+	var results []paginatedInstrumentResult
+	for _, item := range resp.List {
+		var filtered []models.InsiderRowV1
+		for _, v := range item.Values {
+			if input.TransactionType != "" {
+				isBuy := strings.EqualFold(input.TransactionType, "buy")
+				isSell := strings.EqualFold(input.TransactionType, "sell")
+				// TransactionType: 1 = buy, 2 = sell (Börsdata convention)
+				if isBuy && v.TransactionType != 1 {
+					continue
+				}
+				if isSell && v.TransactionType != 2 {
+					continue
+				}
+			}
+			if input.MinAmount > 0 && math.Abs(v.Amount) < input.MinAmount {
+				continue
+			}
+			if input.From != "" && v.TransactionDate < input.From {
+				continue
+			}
+			if input.To != "" && v.TransactionDate > input.To {
+				continue
+			}
+			filtered = append(filtered, v)
+		}
+
+		results = append(results, paginatedInstrumentResult{
+			InsID:  item.InsID,
+			Total:  len(filtered),
+			Offset: input.Offset,
+			Limit:  limit,
+			Values: paginate(filtered, input.Offset, limit),
+		})
+	}
+	return textResult(results), nil, nil
 }
 
-func (h *handlers) getShortHoldings(ctx context.Context, request *mcp.CallToolRequest, _ emptyInput) (*mcp.CallToolResult, any, error) {
+type shortHoldingsInput struct {
+	Offset             int     `json:"offset,omitempty" jsonschema:"Skip first N instruments (default: 0)"`
+	Limit              int     `json:"limit,omitempty" jsonschema:"Max instruments to return (default: 50)"`
+	MinShortingPercent float64 `json:"min_shorting_percent,omitempty" jsonschema:"Filter: only instruments with shorting percent (absolute value) >= this value"`
+}
+
+type paginatedResult struct {
+	Total  int `json:"total"`
+	Offset int `json:"offset"`
+	Limit  int `json:"limit"`
+	Values any `json:"values"`
+}
+
+func (h *handlers) getShortHoldings(ctx context.Context, request *mcp.CallToolRequest, input shortHoldingsInput) (*mcp.CallToolResult, any, error) {
 	resp, err := h.client.GetShortHoldings()
 	if err != nil {
 		return errorResult(fmt.Sprintf("Failed to get short holdings: %v", err)), nil, nil
 	}
-	// Filter out entries where Values is nil/empty
+
+	limit := input.Limit
+	if limit <= 0 {
+		limit = 50
+	}
+
 	var filtered []models.ShortsRespV1
 	for _, item := range resp.List {
-		if len(item.Values) > 0 {
-			filtered = append(filtered, item)
+		if input.MinShortingPercent > 0 {
+			if item.ShortsProc == nil || math.Abs(*item.ShortsProc) < input.MinShortingPercent {
+				continue
+			}
 		}
+		filtered = append(filtered, item)
 	}
-	return textResult(filtered), nil, nil
+
+	return textResult(paginatedResult{
+		Total:  len(filtered),
+		Offset: input.Offset,
+		Limit:  limit,
+		Values: paginate(filtered, input.Offset, limit),
+	}), nil, nil
 }
 
 type instrumentListWithMaxCountInput struct {

@@ -36,13 +36,16 @@ func TestGetInsiderHoldings(t *testing.T) {
 }
 
 func TestGetShortHoldings(t *testing.T) {
+	shortsProc := -2.5
+	shortsHolders := 3.0
 	expected := models.ShortHoldingsResponse{
 		List: []models.ShortsRespV1{
 			{
-				InsID: 1,
-				Values: []models.ShortsRowV1{
-					{ReportID: 100, PositionHolderName: "HedgeFund AB", ISIN: "SE0001234567", ShortingPercent: 2.5, NotifiedCapital: 1000000, Currency: "SEK", ReportDate: "2025-01-15"},
-				},
+				InsID:         1,
+				ShortsProc:    &shortsProc,
+				ShortsHolders: &shortsHolders,
+				Trend1w:       5.0,
+				Trend1m:       10.0,
 			},
 		},
 	}
@@ -57,8 +60,11 @@ func TestGetShortHoldings(t *testing.T) {
 	if len(result.List) != 1 {
 		t.Fatalf("expected 1 shorts resp, got %d", len(result.List))
 	}
-	if result.List[0].Values[0].PositionHolderName != "HedgeFund AB" {
-		t.Errorf("expected HedgeFund AB, got %s", result.List[0].Values[0].PositionHolderName)
+	if result.List[0].ShortsProc == nil || *result.List[0].ShortsProc != -2.5 {
+		t.Errorf("expected shortsProc=-2.5, got %v", result.List[0].ShortsProc)
+	}
+	if result.List[0].ShortsHolders == nil || *result.List[0].ShortsHolders != 3.0 {
+		t.Errorf("expected shortsHolders=3.0, got %v", result.List[0].ShortsHolders)
 	}
 	log.assertParam(t, "/v1/holdings/shorts", "authKey", "test-key")
 }
