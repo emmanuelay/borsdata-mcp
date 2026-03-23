@@ -1,4 +1,4 @@
-.PHONY: build clean test test-integration install help mcpb
+.PHONY: build clean test test-integration install help scan lint mcpb
 
 # Binary name
 BINARY_NAME=borsdata-mcp
@@ -56,6 +56,14 @@ deps: ## Download dependencies
 	@go mod download
 	@go mod tidy
 	@echo "Dependencies updated"
+
+scan: ## Run security scan with govulncheck
+	@echo "Running vulnerability scan..."
+	@govulncheck ./...
+
+lint: ## Run static analysis with staticcheck
+	@echo "Running static analysis..."
+	@staticcheck ./...
 
 mcpb: ## Build .mcpb bundles from goreleaser dist/
 	@scripts/build-mcpb.sh $(VERSION)
