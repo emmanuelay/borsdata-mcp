@@ -32,8 +32,16 @@ archives:
       - goos: windows
         formats: ['zip']
 
+after:
+  hooks:
+    - ./scripts/build-mcpb.sh {{ .Version }}
+
 checksum:
   name_template: 'checksums.txt'
+
+release:
+  extra_files:
+    - glob: dist/*.mcpb
 
 changelog:
   sort: asc
