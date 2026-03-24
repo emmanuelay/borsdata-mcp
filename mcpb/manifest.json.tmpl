@@ -1,26 +1,29 @@
 {
-  "manifest_version": "0.3",
+  "manifest_version": "0.4",
   "name": "borsdata-mcp",
   "display_name": "Börsdata MCP",
   "description": "MCP server for the Börsdata API — access Swedish stock market data, financial reports, KPIs, and instrument metadata.",
   "version": "%%VERSION%%",
-  "author": "emmanuelay",
-  "repository": "https://github.com/emmanuelay/borsdata-mcp",
+  "author": {
+    "name": "Emmanuel Ay",
+    "url": "https://github.com/emmanuelay"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emmanuelay/borsdata-mcp"
+  },
   "homepage": "https://github.com/emmanuelay/borsdata-mcp",
   "license": "MIT",
   "server": {
     "type": "binary",
+    "entry_point": "server/borsdata-mcp",
     "mcp_config": {
       "command": "server/borsdata-mcp",
       "env": {
-        "BORSDATA_API_KEY": "{{user_config.api_key}}"
-      }
-    }
-  },
-  "platform_overrides": {
-    "win32": {
-      "server": {
-        "mcp_config": {
+        "BORSDATA_API_KEY": "${user_config.api_key}"
+      },
+      "platform_overrides": {
+        "win32": {
           "command": "server/borsdata-mcp.exe"
         }
       }
@@ -29,15 +32,15 @@
   "compatibility": {
     "platforms": ["darwin", "win32", "linux"]
   },
-  "user_config": [
-    {
-      "id": "api_key",
-      "name": "Börsdata API Key",
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Börsdata API Key",
       "description": "Your Börsdata API key. Get one at https://borsdata.se",
       "required": true,
       "sensitive": true
     }
-  ],
+  },
   "tools": [
     {
       "name": "list_instruments",
