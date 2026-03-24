@@ -1,4 +1,4 @@
-.PHONY: build clean test test-integration install help scan lint mcpb
+.PHONY: build clean test test-integration install help scan lint mcpb tags
 
 # Binary name
 BINARY_NAME=borsdata-mcp
@@ -64,6 +64,9 @@ scan: ## Run security scan with govulncheck
 lint: ## Run static analysis with staticcheck
 	@echo "Running static analysis..."
 	@staticcheck ./...
+
+tags: ## List all git tags
+	@git tag -l --sort=-v:refname | grep . || echo "No tags found"
 
 mcpb: ## Build .mcpb bundles from goreleaser dist/
 	@scripts/build-mcpb.sh $(VERSION)
