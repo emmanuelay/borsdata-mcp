@@ -40,8 +40,8 @@ jobs:
             name=$(basename "$f" .mcpb)
             label=$(echo "$name" | sed \
               -e "s/^borsdata-mcp_[^_]*/Börsdata MCP/" \
-              -e "s/_darwin_amd64/ (macOS x64)/" \
-              -e "s/_darwin_arm64/ (macOS ARM64)/" \
+              -e "s/_darwin_amd64/ (macOS Intel)/" \
+              -e "s/_darwin_arm64/ (macOS Apple Silicon)/" \
               -e "s/_linux_amd64/ (Linux x64)/" \
               -e "s/_linux_arm64/ (Linux ARM64)/" \
               -e "s/_win32_amd64/ (Windows x64)/" \
