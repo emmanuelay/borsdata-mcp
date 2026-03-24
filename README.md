@@ -44,6 +44,10 @@ En MCP-server (Model Context Protocol) som ger tillgång till Börsdata API. Byg
 
 ## Installera
 
+### Desktop Extension (.mcpb)
+
+Ladda ner `.mcpb`-filen för din plattform från [senaste releasen](https://github.com/emmanuelay/borsdata-mcp/releases/latest) och öppna den i Claude Desktop. Du kommer att bli ombedd att ange din Börsdata API-nyckel vid installation.
+
 ### Homebrew
 
 ```sh
