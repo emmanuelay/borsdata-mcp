@@ -66,13 +66,12 @@ for combo in $PLATFORMS; do
   # Generate manifest.json from template
   sed "s/%%VERSION%%/${VERSION}/g" "$TEMPLATE" > "$tmp_dir/manifest.json"
 
-  # Copy binary into server/ subdirectory
-  mkdir -p "$tmp_dir/server"
-  cp "$bin_path" "$tmp_dir/server/${bin_name}"
+  # Copy binary into bundle root
+  cp "$bin_path" "$tmp_dir/${bin_name}"
 
   # Create .mcpb (ZIP archive)
   mcpb_path="$DIST_DIR/$mcpb_name"
-  (cd "$tmp_dir" && zip -qr "$mcpb_path" manifest.json server/)
+  (cd "$tmp_dir" && zip -qr "$mcpb_path" manifest.json "${bin_name}")
 
   # Clean up temp dir (reset trap)
   rm -rf "$tmp_dir"
