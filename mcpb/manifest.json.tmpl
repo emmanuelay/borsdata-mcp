@@ -18,13 +18,13 @@
     "type": "binary",
     "entry_point": "borsdata-mcp",
     "mcp_config": {
-      "command": "borsdata-mcp",
+      "command": "${__dirname}/borsdata-mcp",
       "env": {
         "BORSDATA_API_KEY": "${user_config.api_key}"
       },
       "platform_overrides": {
         "win32": {
-          "command": "borsdata-mcp.exe"
+          "command": "${__dirname}/borsdata-mcp.exe"
         }
       }
     }
