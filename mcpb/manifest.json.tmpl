@@ -2,7 +2,8 @@
   "manifest_version": "0.4",
   "name": "borsdata-mcp",
   "display_name": "Börsdata MCP",
-  "description": "MCP server for the Börsdata API — access Swedish stock market data, financial reports, KPIs, and instrument metadata.",
+  "description": "MCP-server för Börsdata API — ger tillgång till nordisk aktiedata, finansiella rapporter, nyckeltal och metadata.",
+  "long_description": "Denna MCP-server hämtar data från Börsdata via deras REST API (apiservice.borsdata.se). Servern läser eller skriver inga filer på din dator och kör inga kommandon — den gör enbart utgående HTTPS-anrop till Börsdatas API med din API-nyckel.",
   "version": "%%VERSION%%",
   "author": {
     "name": "Emmanuel Ay",
@@ -35,8 +36,8 @@
   "user_config": {
     "api_key": {
       "type": "string",
-      "title": "Börsdata API Key",
-      "description": "Your Börsdata API key. Get one at https://borsdata.se",
+      "title": "Börsdata API-nyckel",
+      "description": "Din Börsdata API-nyckel. Skaffa en på https://borsdata.se",
       "required": true,
       "sensitive": true
     }
@@ -44,59 +45,105 @@
   "tools": [
     {
       "name": "list_instruments",
-      "description": "List all instruments (companies) available in Börsdata. Returns instrument ID, name, ticker, sector, market, branch, and country."
+      "description": "Lista alla instrument (bolag) i Börsdata. Returnerar ID, namn, ticker, sektor, marknad, bransch och land."
     },
     {
       "name": "search_instruments",
-      "description": "Search instruments by name or ticker. Performs a case-insensitive substring match."
+      "description": "Sök instrument efter namn eller ticker. Skiftlägesokänslig sökning."
     },
     {
       "name": "get_instruments_updated",
-      "description": "Get update timestamps for all instruments. Shows when each instrument was last updated."
+      "description": "Hämta tidsstämplar för senaste uppdatering av varje instrument."
     },
     {
       "name": "get_stock_splits",
-      "description": "Get all stock splits. Returns instrument ID, split date, split type, and ratio."
+      "description": "Hämta alla aktiesplittar. Returnerar instrument-ID, datum, splittyp och förhållande."
     },
     {
       "name": "get_stock_prices",
-      "description": "Get historical stock prices for a specific instrument. Returns date, open, high, low, close, and volume."
+      "description": "Hämta historiska aktiekurser för ett specifikt instrument. Returnerar datum, öppning, högsta, lägsta, stängning och volym."
     },
     {
       "name": "get_latest_stock_prices",
-      "description": "Get the latest stock prices for all instruments."
+      "description": "Hämta senaste aktiekurser för alla instrument."
     },
     {
       "name": "get_stock_prices_by_date",
-      "description": "Get stock prices for all instruments on a specific date."
+      "description": "Hämta aktiekurser för alla instrument på ett specifikt datum."
     },
     {
       "name": "get_reports",
-      "description": "Get financial reports for an instrument. Supports yearly, R12 (rolling 12 months), and quarterly reports."
+      "description": "Hämta finansiella rapporter för ett instrument. Stöder årsrapporter, R12 (rullande 12 månader) och kvartalsrapporter."
     },
     {
       "name": "get_kpis_updated",
-      "description": "Get update timestamps for KPI calculations. Shows when KPIs were last recalculated for each instrument."
+      "description": "Hämta tidsstämplar för senaste nyckeltalsberäkningar per instrument."
     },
     {
       "name": "get_kpi_history",
-      "description": "Get KPI history for an instrument. Returns quarterly mean values over time."
+      "description": "Hämta nyckeltalshistorik för ett instrument. Stöder olika rapporttyper och pristyper."
     },
     {
       "name": "get_kpi_screener",
-      "description": "Get a single KPI value for a specific instrument, period, and calculation type."
+      "description": "Hämta ett enskilt nyckeltalsvärde för ett specifikt instrument, period och beräkningstyp."
     },
     {
       "name": "get_kpi_list_screener",
-      "description": "Get a specific KPI value for all instruments. Useful for screening/filtering instruments by a KPI."
+      "description": "Hämta ett nyckeltal för alla instrument. Användbart för att screena och filtrera aktier."
     },
     {
       "name": "get_kpi_summary",
-      "description": "Get KPI summary for an instrument. Returns yearly KPI aggregations."
+      "description": "Hämta nyckeltalssammanfattning för ett instrument. Returnerar aggregerade nyckeltal per år."
     },
     {
       "name": "get_metadata",
-      "description": "Get reference/metadata. Use this to look up names for IDs returned by other tools."
+      "description": "Hämta referensdata och metadata. Används för att slå upp namn på ID:n som returneras av andra verktyg."
+    },
+    {
+      "name": "get_insider_holdings",
+      "description": "Hämta insidertransaktioner för angivna instrument. Returnerar ägare, position, antal aktier, pris, belopp och transaktionstyp. Stöder filtrering på köp/sälj, minimibelopp och datumintervall."
+    },
+    {
+      "name": "get_short_holdings",
+      "description": "Hämta blankningstdata för alla instrument. Returnerar blankningsandel, antal innehavare, blankat värde (MSEK) och trenddata."
+    },
+    {
+      "name": "get_buyback_holdings",
+      "description": "Hämta aktieåterköp för angivna instrument. Returnerar förändring, pris, valuta, antal aktier och datum."
+    },
+    {
+      "name": "get_report_calendar",
+      "description": "Hämta rapportdatum för angivna instrument. Returnerar publiceringsdatum och rapporttyp."
+    },
+    {
+      "name": "get_dividend_calendar",
+      "description": "Hämta utdelningsdatum för angivna instrument. Returnerar utdelningsbelopp, valuta, frekvens, x-dag och utdelningstyp."
+    }
+  ],
+  "prompts": [
+    {
+      "name": "analysera_aktie",
+      "description": "Analysera en aktie med hjälp av Börsdata",
+      "arguments": ["ticker"],
+      "text": "Sök efter aktien med ticker ${arguments.ticker}, hämta sedan senaste aktiekursen, de senaste kvartalsrapporterna och en nyckeltalssammanfattning. Ge en kortfattad finansiell översikt."
+    },
+    {
+      "name": "jamfor_aktier",
+      "description": "Jämför två aktier sida vid sida",
+      "arguments": ["ticker1", "ticker2"],
+      "text": "Sök efter aktierna ${arguments.ticker1} och ${arguments.ticker2}. Hämta senaste aktiekurser, kvartalsrapporter och nyckeltalssammanfattning för båda. Jämför dem sida vid sida och lyft fram viktiga skillnader."
+    },
+    {
+      "name": "insiderhandel",
+      "description": "Visa senaste insidertransaktioner för en aktie",
+      "arguments": ["ticker"],
+      "text": "Sök efter aktien ${arguments.ticker} och hämta sedan de senaste insidertransaktionerna. Sammanfatta vilka insiders som köpt och sålt, samt belopp och datum."
+    },
+    {
+      "name": "kommande_rapporter",
+      "description": "Visa kommande rapportdatum för aktier",
+      "arguments": ["tickers"],
+      "text": "Sök efter aktierna ${arguments.tickers} (kommaseparerade tickers) och hämta rapportkalendern för var och en. Lista kommande rapportdatum i kronologisk ordning."
     }
   ]
 }
