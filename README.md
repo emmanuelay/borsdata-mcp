@@ -1,11 +1,16 @@
 # Börsdata MCP
 
-En MCP-server (Model Context Protocol) som ger tillgång till Börsdata API. Byggd med [go-sdk](https://github.com/modelcontextprotocol/go-sdk).
+En **inofficiell** MCP-server (Model Context Protocol) som kan användas för att kommunicera med Börsdatas API via AI verktyg såsom Anthropics Claude. 
+Byggd med [go-sdk](https://github.com/modelcontextprotocol/go-sdk).
 
 > [!IMPORTANT]
+> OBS! Detta är en inofficiell produkt. 
+> Börsdata har inte utvecklat den och de kan därför inte heller tillhandahålla support eller underhåll av den.
+> Har du frågor eller funderingar, använd "Issues" tabben eller [kontakta mig](https://x.com/EmmanuelManiAy) på X
+>
 > Börsdata API kräver en API-nyckel. Skaffa en via [Börsdata](https://borsdata.se). API-nyckeln anges via miljövariabeln `BORSDATA_API_KEY`.
 >
-> Vissa verktyg stödjer `scope: global` för icke-nordiska instrument, vilket kräver Pro+-åtkomst.
+> Notera att vissa verktyg stödjer `scope: global` för icke-nordiska instrument, vilket kräver Pro+-åtkomst.
 
 ## Exempelfrågor
 
@@ -46,8 +51,8 @@ En MCP-server (Model Context Protocol) som ger tillgång till Börsdata API. Byg
 
 ### Installera som Desktop Extension (.mcpb) för t.ex. Claude Desktop
 
-Det enklaste sättet att installera Börsdata MCP'n är genom att ladda ner `.mcpb`-filen för din plattform från [senaste releasen](https://github.com/emmanuelay/borsdata-mcp/releases/latest) och öppna den i Claude Desktop. Du kommer att bli ombedd att ange din Börsdata API-nyckel vid installation.
-
+Det enklaste sättet att installera Börsdata MCP'n är genom att ladda ner `.mcpb`-filen för din plattform från [senaste releasen](https://github.com/emmanuelay/borsdata-mcp/releases/latest).
+På Mac skall du kunna dubbelklicka på den och få fram en installationsprocedur i t.ex. Claude Desktop. Du kommer att bli ombedd att ange din Börsdata API-nyckel vid installation.
 
 ### Installera via Homebrew
 
