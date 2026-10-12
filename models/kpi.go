@@ -2,9 +2,9 @@ package models
 
 // KpiV1 represents a single KPI value for an instrument, used in screener and list screener responses.
 type KpiV1 struct {
-	I int64       `json:"i"` // Instrument ID
-	N int         `json:"n"` // KPI ID
-	V float64     `json:"v"` // Value
+	I int64   `json:"i"` // Instrument ID
+	N int     `json:"n"` // KPI ID
+	V float64 `json:"v"` // Value
 }
 
 // KpisResponse is the top-level response for KPI list screener queries.
@@ -26,10 +26,11 @@ type KpisHistoryResponse struct {
 
 // KpiScreenerValue represents a single KPI screener value for one instrument.
 // API returns: {"kpiId":2,"group":"1year","calculation":"mean","value":{"i":2,"n":20.95,"s":null}}
+// N holds numeric KPIs; S holds the value for string KPIs (isString=true in KPI metadata).
 type KpiScreenerValue struct {
 	I int64    `json:"i"`
-	N float64  `json:"n"`
-	S *float64 `json:"s"`
+	N *float64 `json:"n"`
+	S *string  `json:"s"`
 }
 
 // KpiScreenerResponse is the top-level response from the KPI screener endpoint, containing the KPI ID, group, calculation method, and value.

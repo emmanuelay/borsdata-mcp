@@ -2,6 +2,7 @@ package client
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -59,7 +60,8 @@ func (c *Client) get(path string, params url.Values) ([]byte, error) {
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return nil, fmt.Errorf("request failed: %w", err)
+		// Do not wrap err: *url.Error embeds the full request URL, including authKey.
+		return nil, fmt.Errorf("request to %s failed: %w", path, unwrapURLError(err))
 	}
 	defer resp.Body.Close()
 
@@ -73,6 +75,16 @@ func (c *Client) get(path string, params url.Values) ([]byte, error) {
 	}
 
 	return body, nil
+}
+
+// unwrapURLError strips the URL (which carries the API key) from a *url.Error,
+// returning only the underlying transport error.
+func unwrapURLError(err error) error {
+	var uerr *url.Error
+	if errors.As(err, &uerr) {
+		return uerr.Err
+	}
+	return err
 }
 
 // getJSON performs a GET request and unmarshals the JSON response into dest.

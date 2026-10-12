@@ -21,6 +21,12 @@ type paginatedInstrumentResult struct {
 }
 
 func paginate[T any](items []T, offset, limit int) []T {
+	if offset < 0 {
+		offset = 0
+	}
+	if limit < 0 {
+		limit = 0
+	}
 	if offset >= len(items) {
 		return nil
 	}
@@ -395,6 +401,7 @@ func (h *handlers) getInsiderHoldings(ctx context.Context, request *mcp.CallTool
 	if limit <= 0 {
 		limit = 50
 	}
+	offset := max(input.Offset, 0)
 
 	var results []paginatedInstrumentResult
 	for _, item := range resp.List {
@@ -426,9 +433,9 @@ func (h *handlers) getInsiderHoldings(ctx context.Context, request *mcp.CallTool
 		results = append(results, paginatedInstrumentResult{
 			InsID:  item.InsID,
 			Total:  len(filtered),
-			Offset: input.Offset,
+			Offset: offset,
 			Limit:  limit,
-			Values: paginate(filtered, input.Offset, limit),
+			Values: paginate(filtered, offset, limit),
 		})
 	}
 	return textResult(results), nil, nil
@@ -457,6 +464,7 @@ func (h *handlers) getShortHoldings(ctx context.Context, request *mcp.CallToolRe
 	if limit <= 0 {
 		limit = 50
 	}
+	offset := max(input.Offset, 0)
 
 	var filtered []models.ShortsRespV1
 	for _, item := range resp.List {
@@ -470,9 +478,9 @@ func (h *handlers) getShortHoldings(ctx context.Context, request *mcp.CallToolRe
 
 	return textResult(paginatedResult{
 		Total:  len(filtered),
-		Offset: input.Offset,
+		Offset: offset,
 		Limit:  limit,
-		Values: paginate(filtered, input.Offset, limit),
+		Values: paginate(filtered, offset, limit),
 	}), nil, nil
 }
 

@@ -119,3 +119,23 @@ func TestGetGlobalKpiListScreener(t *testing.T) {
 	}
 	log.assertParam(t, "/v1/instruments/global/kpis/2/last/mean", "authKey", "test-key")
 }
+
+func TestGetKpiScreenerStringValue(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write([]byte(`{"kpiId":1,"group":"1year","calculation":"latest","value":{"i":2,"n":null,"s":"Large Cap"}}`))
+	}))
+	defer server.Close()
+
+	c := NewWithBaseURL("test-key", server.URL, "test")
+	resp, err := c.GetKpiScreener(2, 1, "1year", "latest")
+	if err != nil {
+		t.Fatalf("unexpected error: %v", err)
+	}
+	if resp.Value.N != nil {
+		t.Errorf("expected nil numeric value, got %v", *resp.Value.N)
+	}
+	if resp.Value.S == nil || *resp.Value.S != "Large Cap" {
+		t.Errorf("expected string value 'Large Cap', got %v", resp.Value.S)
+	}
+}
