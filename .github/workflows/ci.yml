@@ -31,10 +31,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Staticcheck
-        uses: dominikh/staticcheck-action@v1
+      - name: Set up Go
+        uses: actions/setup-go@v5
         with:
-          version: "latest"
+          go-version: '1.27'
+
+      # Staticcheck releases up to 2026.2.1 cannot read Go 1.27 export data,
+      # so pin a dev build that can. Switch back to @latest once a release
+      # supports Go 1.27.
+      - name: Staticcheck
+        run: |
+          go install honnef.co/go/tools/cmd/staticcheck@v0.7.0-0.dev.0.20261009230814-452d5bb86b45
+          staticcheck ./...
 
   scan:
     needs: test
