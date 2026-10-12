@@ -1,6 +1,6 @@
 module github.com/emmanuelay/borsdata-mcp
 
-go 1.25.5
+go 1.27
 
 require github.com/modelcontextprotocol/go-sdk v1.3.1
 

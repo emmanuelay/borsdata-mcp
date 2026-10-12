@@ -13,10 +13,10 @@ type CountriesResponse struct {
 
 // MarketV1 represents a stock market/exchange with its country, name, and whether it is an index.
 type MarketV1 struct {
-	ID        int    `json:"id"`
-	Name      string `json:"name"`
-	CountryID int    `json:"countryId"`
-	IsIndex   bool   `json:"isIndex"`
+	ID           int    `json:"id"`
+	Name         string `json:"name"`
+	CountryID    int    `json:"countryId"`
+	IsIndex      bool   `json:"isIndex"`
 	ExchangeName string `json:"exchangeName"`
 }
 
@@ -50,9 +50,9 @@ type BranchesResponse struct {
 
 // ReportMetadataV1 represents metadata for a financial report field, including its Swedish and English names.
 type ReportMetadataV1 struct {
-	ReportID     int    `json:"reportId"`
-	NameSv       string `json:"nameSv"`
-	NameEn       string `json:"nameEn"`
+	ReportID int    `json:"reportId"`
+	NameSv   string `json:"nameSv"`
+	NameEn   string `json:"nameEn"`
 }
 
 // ReportMetadataResponse is the top-level response from the report metadata endpoint.

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"net/url"
+	"strings"
 	"sync"
 	"testing"
 )
@@ -72,5 +73,29 @@ func TestAPIErrorHandling(t *testing.T) {
 	_, err := c.GetInstruments()
 	if err == nil {
 		t.Fatal("expected error for unauthorized request")
+	}
+}
+
+func TestTransportErrorDoesNotLeakAPIKey(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		hj, ok := w.(http.Hijacker)
+		if !ok {
+			t.Fatal("hijack unsupported")
+		}
+		conn, _, err := hj.Hijack()
+		if err != nil {
+			t.Fatal(err)
+		}
+		conn.Close() // force a transport-level error on the client side
+	}))
+	defer server.Close()
+
+	c := NewWithBaseURL("SECRET-KEY-123", server.URL, "test")
+	_, err := c.GetInstruments()
+	if err == nil {
+		t.Fatal("expected transport error")
+	}
+	if strings.Contains(err.Error(), "SECRET-KEY-123") || strings.Contains(err.Error(), "authKey") {
+		t.Fatalf("error message leaks API key: %v", err)
 	}
 }
